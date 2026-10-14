@@ -89,19 +89,12 @@ python code/01_model/1_1_infer_all_cv.py
   evidential heads.
 - **Cross-validation**: participant-level 5-fold (train 64% / val 16% / test 20%);
   each participant is tested in exactly one fold (out-of-fold evaluation).
-- **Age-bias correction**: linear correction `pred_bc = pred − (α·age + β)` fitted
-  on the training partition of each fold, applied unchanged to held-out / external
-  data (Beheshti et al.).
 
 ## Data availability
 
 - UK Biobank: https://www.ukbiobank.ac.uk/enable-your-research (application required).
 - SYSUFAH cohorts: not publicly available due to participant privacy/ethics; requests
   to the corresponding author.
-
-## Code availability
-
-https://github.com/kid10590/PancreasAge
 
 ## License
 
