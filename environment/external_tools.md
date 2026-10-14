@@ -51,12 +51,12 @@ personal token (no token is shipped in this repository):
 export OPENGWAS_JWT="<your-token>"   # obtain at https://api.opengwas.io/
 ```
 
-## Pancreas segmentation (not included)
+## Pancreas segmentation
 
-The pancreas masks used as model input were produced by a separate nnU-Net
-segmentation model. That training/inference code is **not** part of this package;
-preprocessing (`00_data_prep/0_2_preprocess_data.py`) assumes that paired
-image/mask volumes are already available. See `docs/DATA_SCHEMA.md`.
+The pancreas masks used as model input were produced with
+[nnU-Net](https://github.com/MIC-DKFZ/nnUNet), a self-configuring segmentation
+framework. `00_data_prep/0_2_preprocess_data.py` expects paired image/mask volumes
+(see `docs/DATA_SCHEMA.md`).
 
 ## Data
 

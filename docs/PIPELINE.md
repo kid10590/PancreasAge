@@ -30,8 +30,9 @@ driven by environment variables (see the top-level `README.md`):
 | `0_1_dcm2nii.py` | Batch DICOM → NIfTI conversion for the external (SYSUFAH) cohort via `dcm2niix`. |
 | `0_2_preprocess_data.py` | NIfTI preprocessing: mask-centred crop/pad to 160×128×64, in-mask linear normalisation to [−1, 1] (background −1); external set resampled to 1.4×1.4×1.8 mm; save `.npy`; build `metadata.csv` (train/val/test split for healthy UKB). |
 
-> Pancreas masks come from a separate nnU-Net segmentation model that is **not**
-> part of this package (see `environment/external_tools.md`).
+> Pancreas segmentation was performed with
+> [nnU-Net](https://github.com/MIC-DKFZ/nnUNet); `0_2_preprocess_data.py` expects
+> paired image/mask volumes.
 
 ### B. Model training / inference — `code/01_model/`
 
@@ -145,10 +146,3 @@ is_healthy (0_0) ──► metadata.csv (0_2) ──► cv_splits.json (1_0_gene
                                                   │
                           PRS (4_0/4_1/4_4/4_5) · MR (4_2/4_3) · mediation (2_6/2_7) · PheWAS (5_0)
 ```
-
-## Not included in this package
-
-- Pancreas segmentation model (nnU-Net) training/inference.
-- Obesity-cohort per-SD ordinal-logistic model with pancreatic fat (Fig 6) and its
-  linear/fat association analyses.
-- Cox landmark analyses, multi-outcome FDR correction.

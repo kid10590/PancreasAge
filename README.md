@@ -1,12 +1,27 @@
 # PancreasAge
 
-Public code release for the study **"MRI-derived pancreatic biological ageing gap
+Code accompanying the study **"MRI-derived pancreatic biological ageing gap
 reveals metabolic risk and a genetic link to type 2 diabetes"**.
 
-We train a 3D Swin Transformer to predict **pancreatic age** from segmentation-masked
-abdominal MRI, define the **accelerated pancreatic ageing gap (APAG)** as the
-age-bias-corrected predicted age minus chronological age, and characterise its
-metabolic associations and genetic architecture.
+The repository covers the complete analysis pipeline:
+
+- **Cohort construction & imaging** — UK Biobank health screening from ICD-10
+  records; abdominal MRI preprocessing (DICOM → NIfTI, segmentation-masked
+  cropping and intensity normalisation). Pancreas segmentation used
+  [nnU-Net](https://github.com/MIC-DKFZ/nnUNet).
+- **Pancreatic age model** — a 3D Swin Transformer trained to predict pancreatic
+  age from abdominal MRI under 5-fold cross-validation with age-bias correction;
+  the **accelerated pancreatic ageing gap (APAG)** is the bias-corrected predicted
+  age minus chronological age.
+- **External validation** — evaluation of the frozen model in independent hospital
+  cohorts.
+- **Metabolic & disease associations** — APAG vs prevalent diabetes, hypertension
+  and obesity (propensity-score matching + multivariable regression), incident type
+  2 diabetes (Cox models, Kaplan–Meier), and OGTT-defined glycaemic status in an
+  obesity cohort.
+- **Genetic analyses** — genome-wide association (REGENIE / PLINK 2.0), polygenic
+  risk scores, two-sample Mendelian randomisation, mediation and phenome-wide
+  association.
 
 ## Contents
 
@@ -77,13 +92,6 @@ python code/01_model/1_1_infer_all_cv.py
 - **Age-bias correction**: linear correction `pred_bc = pred − (α·age + β)` fitted
   on the training partition of each fold, applied unchanged to held-out / external
   data (Beheshti et al.).
-
-## Notes / scope
-
-The following components of the paper are **not** part of this code release:
-pancreas segmentation (nnU-Net), the obesity-cohort per-SD ordinal + pancreatic-fat
-model, and the Cox landmark / multi-outcome FDR analyses. See
-`docs/METHODS_MAP.md` for details.
 
 ## Data availability
 
