@@ -1,0 +1,19 @@
+# outputs / data (never commit)
+results/
+data/*
+!data/README.md
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+
+# editor / OS
+.vscode/
+.DS_Store
+
+# checkpoints / large artifacts
+*.pt
+*.pth
+*.npy
+*.nii.gz
